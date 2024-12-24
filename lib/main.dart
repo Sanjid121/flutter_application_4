@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import './controllers/post_controller.dart';
 
 void main() {
-  runApp(MyApp());
   Get.put(PostController());
+  runApp(MyApp());
+  
 
 }
 
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class PostListScreen extends StatelessWidget {
-  final PostController postController = Get.put(PostController());
+  final PostController postController = Get.find<PostController>();
 
   @override
 
