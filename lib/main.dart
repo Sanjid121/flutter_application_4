@@ -4,9 +4,25 @@ import './controllers/post_controller.dart';
 
 void main() {
   runApp(MyApp());
+  Get.put(PostController());
+
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  
+  @override
+
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+   final postController = Get.find<PostController>();
+      void initState() {
+    Future.delayed(Duration(seconds: 0), () async {
+      await postController.fetchPosts();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -22,6 +38,7 @@ class PostListScreen extends StatelessWidget {
   final PostController postController = Get.put(PostController());
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(

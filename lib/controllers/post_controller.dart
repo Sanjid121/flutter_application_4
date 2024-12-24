@@ -16,16 +16,17 @@ class PostController extends GetxController {
   final ApiService apiService = ApiService();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    fetchPosts();
+
   }
 
   fetchPosts() async {
     try {
       isLoading.value = true;
       final data = await apiService.fetchPosts();
-      posts.value = data.map((item) => Post.fromJson(item)).toList();
+      List<dynamic> alldata = data['data'];
+      posts.value = alldata.map((item) => Post.fromJson(item)).toList();
       isLoading.value = false;
     } catch (e) {
       Get.snackbar('Error', e.toString());
